@@ -6,8 +6,8 @@ func main() {
 	r := gin.Default()
 	r.GET("/ping", func(context *gin.Context) {
 		context.JSON(200, gin.H{
-			"return": "pong",
+			"return": "pong ",
 		})
 	})
-	r.Run()   // server port:8080
+	r.Run() // server port:8080
 }
