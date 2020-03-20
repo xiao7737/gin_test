@@ -6,11 +6,13 @@ import (
 	"net/http"
 )
 
+const requestID = "requestID"
+
 func main() {
 	r := gin.Default()
 	//两个中间件：①检测路由，②给每个请求添加一个requestId
 	r.Use(IPMiddleware(), func(c *gin.Context) {
-		c.Set("requestID", rand.Int())
+		c.Set(requestID, rand.Int())
 		c.Next() // 每个中间件添加next，继续执行不中断后续
 	})
 
@@ -18,8 +20,8 @@ func main() {
 		Mes := gin.H{
 			"message": "ip is allow!",
 		}
-		if reqID, exists := c.Get("requestID"); exists {
-			Mes["requestID"] = reqID
+		if reqID, exists := c.Get(requestID); exists {
+			Mes[requestID] = reqID
 		}
 		c.JSON(http.StatusOK, Mes)
 	})
