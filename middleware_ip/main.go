@@ -2,14 +2,26 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"math/rand"
 	"net/http"
 )
 
 func main() {
 	r := gin.Default()
-	r.Use(IPMiddleware())
+	//两个中间件：①检测路由，②给每个请求添加一个requestId
+	r.Use(IPMiddleware(), func(c *gin.Context) {
+		c.Set("requestID", rand.Int())
+		c.Next() // 每个中间件添加next，继续执行不中断后续
+	})
+
 	r.GET("/test_middleware", func(c *gin.Context) {
-		c.String(http.StatusOK, "check OK")
+		Mes := gin.H{
+			"message": "ip is allow!",
+		}
+		if reqID, exists := c.Get("requestID"); exists {
+			Mes["requestID"] = reqID
+		}
+		c.JSON(http.StatusOK, Mes)
 	})
 	r.Run()
 	//127.0.0.1:8080/test_middleware
