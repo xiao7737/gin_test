@@ -11,20 +11,20 @@ type User struct {
 	Password string `json:"password"`
 }
 
-var Users []User
-
 // insert data
-func (user User) Insert(id int64, err error) {
-	if err = orm.Eloquent.Create(&user).Error; err != nil {
-		id = user.ID
+func (user User) Insert() (id int64, err error) {
+	result := orm.Eloquent.Create(&user)
+	id = user.ID
+	if result.Error != nil {
+		err = result.Error
 		return
 	}
 	return
 }
 
 // get user list
-func (user *User) Users(users []User, err error) {
-	if res, err := orm.Eloquent.Find(&user).Error; err != nil {
+func (user *User) Users() (users []User, err error) {
+	if err = orm.Eloquent.Find(&users).Error; err != nil {
 		return
 	}
 	return
