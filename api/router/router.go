@@ -1,11 +1,26 @@
 package router
 
-import "github.com/gin-gonic/gin"
-import . "gin_test/api/apis" //使用不加包名
+import (
+	. "gin_test/api/apis"
+	"github.com/gin-gonic/gin"
+)
 
 func InitRouter() *gin.Engine {
 	router := gin.Default()
-	router.GET("/users", Users) //获取所有用户： 127.0.0.1:9999/users
-	router.POST("/user", Store) //新增一个用户： 127.0.0.1:9999/user
+	v1 := router.Group("/v1")
+	{
+		v1.GET("/users", Users)        //列表
+		v1.POST("/user", Store)        //新增
+		v1.DELETE("user/:id", Destroy) //删除
+		v1.PUT("/user/:id", Update)    //编辑
+	}
+	v2 := router.Group("/v2")
+	{
+		v2.GET("/products", Users)        //列表
+		v2.POST("/product", Store)        //新增
+		v2.DELETE("product/:id", Destroy) //删除
+		v2.PUT("/product/:id", Update)    //编辑
+	}
+
 	return router
 }

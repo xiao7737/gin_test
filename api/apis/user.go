@@ -4,6 +4,7 @@ import (
 	model "gin_test/api/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
 // get user list
@@ -41,5 +42,41 @@ func Store(c *gin.Context) {
 		"data":    id,
 		"message": "insert success",
 	})
+}
 
+func Destroy(c *gin.Context) {
+	var user model.User
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
+	result, err := user.Destroy(id)
+	if err != nil || result.ID == 0 {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    -1,
+			"message": "Delete failed",
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code":    1,
+		"message": "Delete success",
+	})
+}
+
+func Update(c *gin.Context) {
+	var user model.User
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
+	user.Password = c.Request.FormValue("password")
+	user.Username = c.Request.FormValue("username")
+	user.Age, err = strconv.Atoi(c.Param("age"))
+	result, err := user.Update(id)
+	if err != nil || result.ID == 0 {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    -1,
+			"message": "修改失败",
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code":    1,
+		"message": "修改成功",
+	})
 }
