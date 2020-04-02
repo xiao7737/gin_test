@@ -66,7 +66,7 @@ func Update(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	user.Password = c.Request.FormValue("password")
 	user.Username = c.Request.FormValue("username")
-	user.Age, err = strconv.Atoi(c.Param("age"))
+	user.Age, err = strconv.Atoi(c.Request.FormValue("age"))
 	result, err := user.Update(id)
 	if err != nil || result.ID == 0 {
 		c.JSON(http.StatusOK, gin.H{
