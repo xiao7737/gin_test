@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" width="1200" height="326" onload="init(evt)" viewBox="0 0 1200 326" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg version="1.1" width="1200" height="310" onload="init(evt)" viewBox="0 0 1200 310" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <!-- Flame graph stack visualization. See https://github.com/brendangregg/FlameGraph for latest version, and http://www.brendangregg.com/flamegraphs.html for examples. -->
 <!-- NOTES:  -->
 <defs>
@@ -364,141 +364,121 @@
 	}
 ]]>
 </script>
-<rect x="0.0" y="0" width="1200.0" height="326.0" fill="url(#background)"  />
+<rect x="0.0" y="0" width="1200.0" height="310.0" fill="url(#background)"  />
 <text id="title" x="600.00" y="24" >Flame Graph</text>
-<text id="details" x="10.00" y="309" > </text>
+<text id="details" x="10.00" y="293" > </text>
 <text id="unzoom" x="10.00" y="24" class="hide">Reset Zoom</text>
 <text id="search" x="1090.00" y="24" >Search</text>
 <text id="ignorecase" x="1174.00" y="24" >ic</text>
-<text id="matched" x="1090.00" y="309" > </text>
+<text id="matched" x="1090.00" y="293" > </text>
 <g id="frames">
 <g >
-<title>runtime/pprof.(*Profile).WriteTo (2,853,721 samples, 73.08%)</title><rect x="10.0" y="165" width="862.3" height="15.0" fill="rgb(0,214,153)" rx="2" ry="2" />
-<text  x="13.00" y="175.5" >runtime/pprof.(*Profile).WriteTo</text>
+<title>runtime.doInit (2,098,088 samples, 100.00%)</title><rect x="10.0" y="213" width="1180.0" height="15.0" fill="rgb(0,215,102)" rx="2" ry="2" />
+<text  x="13.00" y="223.5" >runtime.doInit</text>
 </g>
 <g >
-<title>compress/flate.(*compressor).init (1,929,473 samples, 49.41%)</title><rect x="289.3" y="53" width="583.0" height="15.0" fill="rgb(0,224,8)" rx="2" ry="2" />
-<text  x="292.28" y="63.5" >compress/flate.(*compressor).init</text>
+<title>all (2,098,088 samples, 100%)</title><rect x="10.0" y="261" width="1180.0" height="15.0" fill="rgb(0,210,20)" rx="2" ry="2" />
+<text  x="13.00" y="271.5" ></text>
 </g>
 <g >
-<title>net/http.(*conn).serve (2,853,721 samples, 73.08%)</title><rect x="10.0" y="261" width="862.3" height="15.0" fill="rgb(0,231,34)" rx="2" ry="2" />
-<text  x="13.00" y="271.5" >net/http.(*conn).serve</text>
+<title>regexp/syntax.Parse (524,344 samples, 24.99%)</title><rect x="895.1" y="69" width="294.9" height="15.0" fill="rgb(0,231,151)" rx="2" ry="2" />
+<text  x="898.10" y="79.5" >regexp/syntax.Parse</text>
 </g>
 <g >
-<title>regexp/syntax.Compile (524,368 samples, 13.43%)</title><rect x="1031.6" y="101" width="158.4" height="15.0" fill="rgb(0,199,106)" rx="2" ry="2" />
-<text  x="1034.55" y="111.5" >regexp/syntax.Compile</text>
+<title>regexp.MustCompile (1,048,688 samples, 49.98%)</title><rect x="10.0" y="133" width="589.8" height="15.0" fill="rgb(0,226,174)" rx="2" ry="2" />
+<text  x="13.00" y="143.5" >regexp.MustCompile</text>
 </g>
 <g >
-<title>all (3,905,069 samples, 100%)</title><rect x="10.0" y="277" width="1180.0" height="15.0" fill="rgb(0,206,131)" rx="2" ry="2" />
-<text  x="13.00" y="287.5" ></text>
+<title>gopkg.in/go-playground/validator%2ev8.init (1,049,400 samples, 50.02%)</title><rect x="599.8" y="133" width="590.2" height="15.0" fill="rgb(0,225,153)" rx="2" ry="2" />
+<text  x="602.80" y="143.5" >gopkg.in/go-playground/validator%2ev8.init</text>
 </g>
 <g >
-<title>compress/gzip.(*Writer).Write (2,853,721 samples, 73.08%)</title><rect x="10.0" y="85" width="862.3" height="15.0" fill="rgb(0,220,77)" rx="2" ry="2" />
-<text  x="13.00" y="95.5" >compress/gzip.(*Writer).Write</text>
+<title>regexp.Compile (1,048,688 samples, 49.98%)</title><rect x="10.0" y="117" width="589.8" height="15.0" fill="rgb(0,228,159)" rx="2" ry="2" />
+<text  x="13.00" y="127.5" >regexp.Compile</text>
 </g>
 <g >
-<title>runtime.doInit (1,051,348 samples, 26.92%)</title><rect x="872.3" y="245" width="317.7" height="15.0" fill="rgb(0,211,6)" rx="2" ry="2" />
-<text  x="875.31" y="255.5" >runtime.doInit</text>
+<title>regexp.compile (1,048,688 samples, 49.98%)</title><rect x="10.0" y="101" width="589.8" height="15.0" fill="rgb(0,209,79)" rx="2" ry="2" />
+<text  x="13.00" y="111.5" >regexp.compile</text>
 </g>
 <g >
-<title>net/http.(*ServeMux).ServeHTTP (2,853,721 samples, 73.08%)</title><rect x="10.0" y="229" width="862.3" height="15.0" fill="rgb(0,211,141)" rx="2" ry="2" />
-<text  x="13.00" y="239.5" >net/http.(*ServeMux).ServeHTTP</text>
+<title>runtime.doInit (1,049,400 samples, 50.02%)</title><rect x="599.8" y="149" width="590.2" height="15.0" fill="rgb(0,190,74)" rx="2" ry="2" />
+<text  x="602.80" y="159.5" >runtime.doInit</text>
 </g>
 <g >
-<title>net/http/pprof.Index (2,853,721 samples, 73.08%)</title><rect x="10.0" y="197" width="862.3" height="15.0" fill="rgb(0,198,65)" rx="2" ry="2" />
-<text  x="13.00" y="207.5" >net/http/pprof.Index</text>
+<title>regexp/syntax.(*parser).op (524,344 samples, 24.99%)</title><rect x="304.9" y="69" width="294.9" height="15.0" fill="rgb(0,222,167)" rx="2" ry="2" />
+<text  x="307.90" y="79.5" >regexp/syntax.(*parser).op</text>
 </g>
 <g >
-<title>runtime/pprof.writeHeap (2,853,721 samples, 73.08%)</title><rect x="10.0" y="149" width="862.3" height="15.0" fill="rgb(0,231,82)" rx="2" ry="2" />
-<text  x="13.00" y="159.5" >runtime/pprof.writeHeap</text>
+<title>regexp.compileOnePass (525,056 samples, 25.03%)</title><rect x="599.8" y="69" width="295.3" height="15.0" fill="rgb(0,225,163)" rx="2" ry="2" />
+<text  x="602.80" y="79.5" >regexp.compileOnePass</text>
 </g>
 <g >
-<title>runtime/pprof.(*profileBuilder).build (2,853,721 samples, 73.08%)</title><rect x="10.0" y="101" width="862.3" height="15.0" fill="rgb(0,236,102)" rx="2" ry="2" />
-<text  x="13.00" y="111.5" >runtime/pprof.(*profileBuilder).build</text>
+<title>regexp/syntax.(*parser).newRegexp (524,344 samples, 24.99%)</title><rect x="895.1" y="53" width="294.9" height="15.0" fill="rgb(0,197,199)" rx="2" ry="2" />
+<text  x="898.10" y="63.5" >regexp/syntax.(*parser).newRegexp</text>
 </g>
 <g >
-<title>regexp.MustCompile (524,368 samples, 13.43%)</title><rect x="1031.6" y="149" width="158.4" height="15.0" fill="rgb(0,204,152)" rx="2" ry="2" />
-<text  x="1034.55" y="159.5" >regexp.MustCompile</text>
+<title>runtime.main (2,098,088 samples, 100.00%)</title><rect x="10.0" y="245" width="1180.0" height="15.0" fill="rgb(0,208,8)" rx="2" ry="2" />
+<text  x="13.00" y="255.5" >runtime.main</text>
 </g>
 <g >
-<title>runtime.main (1,051,348 samples, 26.92%)</title><rect x="872.3" y="261" width="317.7" height="15.0" fill="rgb(0,195,141)" rx="2" ry="2" />
-<text  x="875.31" y="271.5" >runtime.main</text>
+<title>runtime.doInit (2,098,088 samples, 100.00%)</title><rect x="10.0" y="229" width="1180.0" height="15.0" fill="rgb(0,214,83)" rx="2" ry="2" />
+<text  x="13.00" y="239.5" >runtime.doInit</text>
 </g>
 <g >
-<title>runtime.doInit (1,051,348 samples, 26.92%)</title><rect x="872.3" y="213" width="317.7" height="15.0" fill="rgb(0,190,84)" rx="2" ry="2" />
-<text  x="875.31" y="223.5" >runtime.doInit</text>
+<title>regexp.makeOnePass (525,056 samples, 25.03%)</title><rect x="599.8" y="53" width="295.3" height="15.0" fill="rgb(0,192,208)" rx="2" ry="2" />
+<text  x="602.80" y="63.5" >regexp.makeOnePass</text>
 </g>
 <g >
-<title>compress/flate.NewWriter (2,853,721 samples, 73.08%)</title><rect x="10.0" y="69" width="862.3" height="15.0" fill="rgb(0,225,91)" rx="2" ry="2" />
-<text  x="13.00" y="79.5" >compress/flate.NewWriter</text>
+<title>regexp/syntax.(*parser).newRegexp (524,344 samples, 24.99%)</title><rect x="304.9" y="53" width="294.9" height="15.0" fill="rgb(0,199,172)" rx="2" ry="2" />
+<text  x="307.90" y="63.5" >regexp/syntax.(*parser).newRegexp</text>
 </g>
 <g >
-<title>compress/flate.newDeflateFast (596,999 samples, 15.29%)</title><rect x="691.9" y="37" width="180.4" height="15.0" fill="rgb(0,222,101)" rx="2" ry="2" />
-<text  x="694.92" y="47.5" >compress/flate.newDefla..</text>
+<title>regexp.compile (1,049,400 samples, 50.02%)</title><rect x="599.8" y="85" width="590.2" height="15.0" fill="rgb(0,218,184)" rx="2" ry="2" />
+<text  x="602.80" y="95.5" >regexp.compile</text>
 </g>
 <g >
-<title>runtime/pprof.writeHeapInternal (2,853,721 samples, 73.08%)</title><rect x="10.0" y="133" width="862.3" height="15.0" fill="rgb(0,224,155)" rx="2" ry="2" />
-<text  x="13.00" y="143.5" >runtime/pprof.writeHeapInternal</text>
+<title>regexp/syntax.(*parser).newRegexp (524,344 samples, 24.99%)</title><rect x="10.0" y="37" width="294.9" height="15.0" fill="rgb(0,228,204)" rx="2" ry="2" />
+<text  x="13.00" y="47.5" >regexp/syntax.(*parser).newRegexp</text>
 </g>
 <g >
-<title>net/http.HandlerFunc.ServeHTTP (2,853,721 samples, 73.08%)</title><rect x="10.0" y="213" width="862.3" height="15.0" fill="rgb(0,229,169)" rx="2" ry="2" />
-<text  x="13.00" y="223.5" >net/http.HandlerFunc.ServeHTTP</text>
+<title>runtime.doInit (2,098,088 samples, 100.00%)</title><rect x="10.0" y="181" width="1180.0" height="15.0" fill="rgb(0,198,36)" rx="2" ry="2" />
+<text  x="13.00" y="191.5" >runtime.doInit</text>
 </g>
 <g >
-<title>github.com/go-sql-driver/mysql.init (526,980 samples, 13.49%)</title><rect x="872.3" y="197" width="159.3" height="15.0" fill="rgb(0,193,182)" rx="2" ry="2" />
-<text  x="875.31" y="207.5" >github.com/go-sql-dr..</text>
+<title>regexp.MustCompile (1,049,400 samples, 50.02%)</title><rect x="599.8" y="117" width="590.2" height="15.0" fill="rgb(0,220,115)" rx="2" ry="2" />
+<text  x="602.80" y="127.5" >regexp.MustCompile</text>
 </g>
 <g >
-<title>net/http/pprof.handler.ServeHTTP (2,853,721 samples, 73.08%)</title><rect x="10.0" y="181" width="862.3" height="15.0" fill="rgb(0,215,208)" rx="2" ry="2" />
-<text  x="13.00" y="191.5" >net/http/pprof.handler.ServeHTTP</text>
+<title>regexp/syntax.(*parser).literal (524,344 samples, 24.99%)</title><rect x="10.0" y="69" width="294.9" height="15.0" fill="rgb(0,218,35)" rx="2" ry="2" />
+<text  x="13.00" y="79.5" >regexp/syntax.(*parser).literal</text>
 </g>
 <g >
-<title>runtime.doInit (1,051,348 samples, 26.92%)</title><rect x="872.3" y="229" width="317.7" height="15.0" fill="rgb(0,224,62)" rx="2" ry="2" />
-<text  x="875.31" y="239.5" >runtime.doInit</text>
+<title>github.com/jinzhu/inflection.init.0 (1,048,688 samples, 49.98%)</title><rect x="10.0" y="165" width="589.8" height="15.0" fill="rgb(0,207,101)" rx="2" ry="2" />
+<text  x="13.00" y="175.5" >github.com/jinzhu/inflection.init.0</text>
 </g>
 <g >
-<title>runtime/pprof.writeHeapProto (2,853,721 samples, 73.08%)</title><rect x="10.0" y="117" width="862.3" height="15.0" fill="rgb(0,215,99)" rx="2" ry="2" />
-<text  x="13.00" y="127.5" >runtime/pprof.writeHeapProto</text>
+<title>regexp.Compile (1,049,400 samples, 50.02%)</title><rect x="599.8" y="101" width="590.2" height="15.0" fill="rgb(0,236,50)" rx="2" ry="2" />
+<text  x="602.80" y="111.5" >regexp.Compile</text>
 </g>
 <g >
-<title>runtime.doInit (524,368 samples, 13.43%)</title><rect x="1031.6" y="197" width="158.4" height="15.0" fill="rgb(0,209,69)" rx="2" ry="2" />
-<text  x="1034.55" y="207.5" >runtime.doInit</text>
+<title>runtime.doInit (1,049,400 samples, 50.02%)</title><rect x="599.8" y="165" width="590.2" height="15.0" fill="rgb(0,192,95)" rx="2" ry="2" />
+<text  x="602.80" y="175.5" >runtime.doInit</text>
 </g>
 <g >
-<title>regexp/syntax.(*compiler).compile (524,368 samples, 13.43%)</title><rect x="1031.6" y="85" width="158.4" height="15.0" fill="rgb(0,228,85)" rx="2" ry="2" />
-<text  x="1034.55" y="95.5" >regexp/syntax.(*comp..</text>
+<title>regexp/syntax.(*parser).newLiteral (524,344 samples, 24.99%)</title><rect x="10.0" y="53" width="294.9" height="15.0" fill="rgb(0,214,28)" rx="2" ry="2" />
+<text  x="13.00" y="63.5" >regexp/syntax.(*parser).newLiteral</text>
 </g>
 <g >
-<title>regexp.compile (524,368 samples, 13.43%)</title><rect x="1031.6" y="117" width="158.4" height="15.0" fill="rgb(0,206,136)" rx="2" ry="2" />
-<text  x="1034.55" y="127.5" >regexp.compile</text>
+<title>regexp/syntax.Parse (1,048,688 samples, 49.98%)</title><rect x="10.0" y="85" width="589.8" height="15.0" fill="rgb(0,208,167)" rx="2" ry="2" />
+<text  x="13.00" y="95.5" >regexp/syntax.Parse</text>
 </g>
 <g >
-<title>github.com/jinzhu/inflection.init.0 (524,368 samples, 13.43%)</title><rect x="1031.6" y="181" width="158.4" height="15.0" fill="rgb(0,227,183)" rx="2" ry="2" />
-<text  x="1034.55" y="191.5" >github.com/jinzhu/in..</text>
+<title>github.com/jinzhu/inflection.compile (1,048,688 samples, 49.98%)</title><rect x="10.0" y="149" width="589.8" height="15.0" fill="rgb(0,211,138)" rx="2" ry="2" />
+<text  x="13.00" y="159.5" >github.com/jinzhu/inflection.compile</text>
 </g>
 <g >
-<title>github.com/jinzhu/inflection.compile (524,368 samples, 13.43%)</title><rect x="1031.6" y="165" width="158.4" height="15.0" fill="rgb(0,238,130)" rx="2" ry="2" />
-<text  x="1034.55" y="175.5" >github.com/jinzhu/in..</text>
-</g>
-<g >
-<title>regexp.Compile (524,368 samples, 13.43%)</title><rect x="1031.6" y="133" width="158.4" height="15.0" fill="rgb(0,195,93)" rx="2" ry="2" />
-<text  x="1034.55" y="143.5" >regexp.Compile</text>
-</g>
-<g >
-<title>net/http.serverHandler.ServeHTTP (2,853,721 samples, 73.08%)</title><rect x="10.0" y="245" width="862.3" height="15.0" fill="rgb(0,230,133)" rx="2" ry="2" />
-<text  x="13.00" y="255.5" >net/http.serverHandler.ServeHTTP</text>
-</g>
-<g >
-<title>regexp/syntax.(*compiler).rune (524,368 samples, 13.43%)</title><rect x="1031.6" y="53" width="158.4" height="15.0" fill="rgb(0,219,89)" rx="2" ry="2" />
-<text  x="1034.55" y="63.5" >regexp/syntax.(*comp..</text>
-</g>
-<g >
-<title>regexp/syntax.(*compiler).compile (524,368 samples, 13.43%)</title><rect x="1031.6" y="69" width="158.4" height="15.0" fill="rgb(0,204,63)" rx="2" ry="2" />
-<text  x="1034.55" y="79.5" >regexp/syntax.(*comp..</text>
-</g>
-<g >
-<title>regexp/syntax.(*compiler).inst (524,368 samples, 13.43%)</title><rect x="1031.6" y="37" width="158.4" height="15.0" fill="rgb(0,202,153)" rx="2" ry="2" />
-<text  x="1034.55" y="47.5" >regexp/syntax.(*comp..</text>
+<title>runtime.doInit (2,098,088 samples, 100.00%)</title><rect x="10.0" y="197" width="1180.0" height="15.0" fill="rgb(0,191,86)" rx="2" ry="2" />
+<text  x="13.00" y="207.5" >runtime.doInit</text>
 </g>
 </g>
 </svg>

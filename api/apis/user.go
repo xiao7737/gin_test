@@ -7,6 +7,11 @@ import (
 	"strconv"
 )
 
+// c.Query("key")  获取url里面的参数   同 c.Param("key")
+// c.DefaultQuery("key", default_value)
+// c.PostForm("key")   body里面的form表单
+// c.DefaultPostForm("key", default_value)
+
 // get user list
 func Users(c *gin.Context) {
 	var userModel model.User
@@ -27,8 +32,13 @@ func Users(c *gin.Context) {
 // create  a new user
 func Store(c *gin.Context) {
 	var userModel model.User
-	userModel.Username = c.Request.FormValue("username")
-	userModel.Password = c.Request.FormValue("password")
+	// 接受json格式，直接绑定在User结构体上，并进行json转化，可以使用结构体的tag进行相关验证
+	if err := c.ShouldBindJSON(&userModel); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"valid error": err.Error(),
+		})
+		return
+	}
 	id, err := userModel.Insert()
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
@@ -64,9 +74,12 @@ func Destroy(c *gin.Context) {
 func Update(c *gin.Context) {
 	var user model.User
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
-	user.Password = c.Request.FormValue("password")
-	user.Username = c.Request.FormValue("username")
-	user.Age, err = strconv.Atoi(c.Request.FormValue("age"))
+	if err := c.ShouldBindJSON(&user); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"valid error": err.Error(),
+		})
+		return
+	}
 	result, err := user.Update(id)
 	if err != nil || result.ID == 0 {
 		c.JSON(http.StatusOK, gin.H{
