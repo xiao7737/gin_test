@@ -14,13 +14,5 @@ func InitRouter() *gin.Engine {
 		v1.DELETE("user/:id", Destroy) //删除
 		v1.PUT("/user/:id", Update)    //编辑
 	}
-	v2 := router.Group("/v2")
-	{
-		v2.GET("/products", Users)        //列表
-		v2.POST("/product", Store)        //新增
-		v2.DELETE("product/:id", Destroy) //删除
-		v2.PUT("/product/:id", Update)    //编辑
-	}
-
 	return router
 }
