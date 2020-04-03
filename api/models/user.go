@@ -33,6 +33,11 @@ func (user User) Insert() (id int64, err error) {
 
 // get user list
 func (user *User) Users() (users []User, err error) {
+	/*row := orm.Eloquent.Table("users").Where("username = ?", "xiaoxichuan").Select("username, age").Row()
+	if err = row.Scan(&user.Username, &user.Age); err != nil {
+		return
+	}
+	return*/
 	if err = orm.Eloquent.Find(&users).Error; err != nil {
 		return
 	}
@@ -52,7 +57,7 @@ func (user *User) Destroy(id int64) (Result User, err error) {
 }
 
 func (user *User) Update(id int64) (updateUser User, err error) {
-	if err = orm.Eloquent.Select([]string{"id", "username"}).First(&updateUser, id).Error; err != nil {
+	if err = orm.Eloquent.First(&updateUser, id).Error; err != nil {
 		return
 	}
 	if err = orm.Eloquent.Model(&updateUser).Update(&user).Error; err != nil {
@@ -60,3 +65,5 @@ func (user *User) Update(id int64) (updateUser User, err error) {
 	}
 	return
 }
+
+// 所有链式方法都会创建并克隆一个新的 DB 对象 (共享一个连接池)，gorm 在多 goroutine 中是并发安全的
