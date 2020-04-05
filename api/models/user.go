@@ -6,8 +6,8 @@ import (
 
 type User struct {
 	ID       int64  `json:"id"`
-	Username string `form:"username" json:"username" binding:"required"`
-	Age      int    `form:"username" json:"age" binding:"required,gt=10"` // binding中的规则不能有空格！！！此处遇坑
+	Username string `form:"username" json:"username" binding:"required,NameValid"` //添加自定义验证规则
+	Age      int    `form:"username" json:"age" binding:"required,gt=10,lt=120"`   // binding中的规则不能有空格！！！此处遇坑
 	//或者使用 sql.NullInt64，scanner/valuer避免0，''，false的情况
 	Password string `form:"password" json:"password" binding:"required"`
 }
