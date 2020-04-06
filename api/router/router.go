@@ -27,7 +27,7 @@ func InitRouter() *gin.Engine { // Engine结构体包含了 RouterGroup
 }
 
 // RouterGroup是对路由树的包装
-// 路由树的每个节点会挂载若干函数和中间件构成一个函数处理链
+// 路由树的每个节点会挂载若干函数和中间件构成一个函数处理链：这也是中间件的加载过程，将中间件加载到对应的节点上面
 // Engine 结构体继承了 RouterGroup ，所以 Engine 直接具备了 RouterGroup 所有的路由管理功能
 // 这是为什么在 Hello World例子中，可以直接使用 Engine 对象来定义路由规则。同时 RouteGroup 对象里面还会包含一个 Engine 的指针
 // 通过调用 Engine.addRoute 方法将请求处理器挂接到路由树中，路由规则被分成9颗前缀树，对应9中http方法
