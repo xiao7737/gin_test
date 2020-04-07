@@ -34,3 +34,7 @@ func main() {
 // 输入:list 函数名      查看函数具体耗时
 // 输入：web  查看展示图
 // 输入：svg  生成svg图像
+
+// 查看gc 和协程信息
+// go test -bench . -trace trace.out
+// go tool trace trace.out
