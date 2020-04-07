@@ -2,6 +2,7 @@ package apis
 
 import (
 	model "gin_test/api/models"
+	"gin_test/msg"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -14,85 +15,59 @@ import (
 
 // get user list
 func Users(c *gin.Context) {
+	ginReturn := msg.Gin{C: c}
 	var userModel model.User
 	result, count, err := userModel.Users()
 	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"code": -1,
-			"data": "未找到信息",
-		})
+		ginReturn.Response(http.StatusOK, msg.NO_ROWS, nil)
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"code":  1,
-		"data":  result,
-		"count": count,
-	})
+	ginReturn.Response(http.StatusOK, msg.SUCCESS, gin.H{"data": result, "count": count})
 }
 
 // create  a new user
 func Store(c *gin.Context) {
+	ginReturn := msg.Gin{C: c}
 	var userModel model.User
 	// 接受json格式，直接绑定在User结构体上，并进行json转化，可以使用结构体的tag进行相关验证
 	if err := c.ShouldBindJSON(&userModel); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"valid error": err.Error(),
-		})
+		ginReturn.Response(http.StatusBadRequest, msg.VALID_FAILED, err)
 		return
 	}
 	id, err := userModel.Insert()
 	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"code":    -1,
-			"message": err,
-		})
+		ginReturn.Response(http.StatusBadRequest, msg.INSERT_FALIED, err)
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"code":    1,
-		"data":    id,
-		"message": "insert success",
-	})
+	ginReturn.Response(http.StatusOK, msg.SUCCESS, gin.H{"id": id})
 }
 
 func Destroy(c *gin.Context) {
+	ginReturn := msg.Gin{C: c}
 	var user model.User
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	err = user.Destroy(id)
 	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"code":    -1,
-			"message": err,
-		})
+		ginReturn.Response(http.StatusOK, msg.DELETE_FALIED, err)
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"code":    1,
-		"message": "Delete success",
-	})
+	ginReturn.Response(http.StatusOK, msg.SUCCESS, nil)
 }
 
 func Update(c *gin.Context) {
+	ginReturn := msg.Gin{C: c}
 	var user model.User
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err := c.ShouldBindJSON(&user); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"valid error": err.Error(),
-		})
+		ginReturn.Response(http.StatusOK, msg.VALID_FAILED, err)
 		return
 	}
 	result, err := user.Update(id)
 	if err != nil || result.ID == 0 {
-		c.JSON(http.StatusOK, gin.H{
-			"code":    -1,
-			"message": err,
-		})
+		ginReturn.Response(http.StatusOK, msg.UPDATE_FALIED, err)
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"code":    1,
-		"message": "修改成功",
-	})
+	ginReturn.Response(http.StatusOK, msg.SUCCESS, nil)
 }
 
 func GetUserById(c *gin.Context) {
