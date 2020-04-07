@@ -35,35 +35,36 @@ func (user User) Insert() (id int64, err error) {
 }
 
 // get user list
-func (user *User) Users() (users []User, err error) {
-	/*row := orm.Eloquent.Table("users").Where("username = ?", "xiaoxichuan").Select("username, age").Row()
+func (user *User) Users() (users []User, count int, err error) {
+	if err = orm.Eloquent.Order("id desc").Find(&users).Count(&count).Error; err != nil {
+		return
+	}
+	return
+	/*row := orm.Eloquent.Table("users").Where("username = ?", "xiao_admin").Select("username, age").Row()
 	if err = row.Scan(&user.Username, &user.Age); err != nil {
 		return
 	}
 	return*/
-	if err = orm.Eloquent.Find(&users).Error; err != nil {
-		return
-	}
-	return
 }
 
 // delete
-func (user *User) Destroy(id int64) (Result User, err error) {
-	if err = orm.Eloquent.Select([]string{"id"}).First(&user, id).Error; err != nil {
+func (user *User) Destroy(id int64) (err error) {
+	if err = orm.Eloquent.Select("id").First(&user, id).Error; err != nil {
 		return
 	}
 	if err = orm.Eloquent.Delete(&user).Error; err != nil {
 		return
 	}
-	Result = *user
 	return
 }
 
-func (user *User) Update(id int64) (updateUser User, err error) {
-	if err = orm.Eloquent.First(&updateUser, id).Error; err != nil {
+//忽略更新字段 Omit
+//指定更新字段 Select
+func (user *User) Update(id int64) (users User, err error) {
+	if err = orm.Eloquent.First(&users, id).Error; err != nil {
 		return
 	}
-	if err = orm.Eloquent.Model(&updateUser).Update(&user).Error; err != nil {
+	if err = orm.Eloquent.Model(&users).Omit("username").Update(&user).Error; err != nil {
 		return
 	}
 	return

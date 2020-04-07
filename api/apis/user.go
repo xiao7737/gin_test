@@ -15,17 +15,18 @@ import (
 // get user list
 func Users(c *gin.Context) {
 	var userModel model.User
-	result, err := userModel.Users()
+	result, count, err := userModel.Users()
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    -1,
-			"message": "未找到信息",
+			"code": -1,
+			"data": "未找到信息",
 		})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"code": 1,
-		"data": result,
+		"code":  1,
+		"data":  result,
+		"count": count,
 	})
 }
 
@@ -43,7 +44,7 @@ func Store(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":    -1,
-			"message": "Insert failed",
+			"message": err,
 		})
 		return
 	}
@@ -57,11 +58,11 @@ func Store(c *gin.Context) {
 func Destroy(c *gin.Context) {
 	var user model.User
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
-	result, err := user.Destroy(id)
-	if err != nil || result.ID == 0 {
+	err = user.Destroy(id)
+	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":    -1,
-			"message": "Delete failed",
+			"message": err,
 		})
 		return
 	}
@@ -84,7 +85,7 @@ func Update(c *gin.Context) {
 	if err != nil || result.ID == 0 {
 		c.JSON(http.StatusOK, gin.H{
 			"code":    -1,
-			"message": "修改失败",
+			"message": err,
 		})
 		return
 	}
@@ -113,8 +114,7 @@ func GetUserById(c *gin.Context) {
 // 根据用户名的like
 func GetUserByName(c *gin.Context) {
 	var user model.User
-	username := c.Query("username")
-	result, err := user.GetUserByName(username)
+	result, err := user.GetUserByName(c.Query("username"))
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":    -1,
