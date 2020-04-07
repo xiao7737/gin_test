@@ -2,12 +2,14 @@ package models
 
 import (
 	orm "gin_test/api/database"
+	"strings"
 )
 
 type User struct {
 	ID       int64  `json:"id"`
 	Username string `form:"username" json:"username" binding:"required,NameValid"` //添加自定义验证规则
-	Age      int    `form:"username" json:"age" binding:"required,gt=10,lt=120"`   // binding中的规则不能有空格！！！此处遇坑
+	Age      int    `form:"age" json:"age" binding:"required,gt=10,lt=120"`
+	// binding中的规则不能有空格！！！此处遇坑
 	//或者使用 sql.NullInt64，scanner/valuer避免0，''，false的情况
 	Password string `form:"password" json:"password" binding:"required"`
 }
@@ -62,6 +64,24 @@ func (user *User) Update(id int64) (updateUser User, err error) {
 		return
 	}
 	if err = orm.Eloquent.Model(&updateUser).Update(&user).Error; err != nil {
+		return
+	}
+	return
+}
+
+func (user *User) GetById(id int64) (users []User, err error) {
+	if err = orm.Eloquent.First(&users, id).Error; err != nil {
+		return
+	}
+	return
+}
+
+// 此处采用strings.Builder拼接like字符串
+func (user *User) GetUserByName(username string) (users []User, err error) {
+	var builder strings.Builder
+	builder.WriteString("%" + username + "%")
+	username = builder.String()
+	if err = orm.Eloquent.Where("username like ?", username).Find(&users).Error; err != nil {
 		return
 	}
 	return

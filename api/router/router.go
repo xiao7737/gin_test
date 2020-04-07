@@ -8,14 +8,16 @@ import (
 	"gopkg.in/go-playground/validator.v8"
 )
 
-func InitRouter() *gin.Engine { // Engine结构体包含了 RouterGroup
+func InitRouter() *gin.Engine {
 	router := gin.Default()
 	v1 := router.Group("/v1")
 	{
-		v1.GET("/users", Users)        //列表
-		v1.POST("/user", Store)        //新增
-		v1.DELETE("user/:id", Destroy) //删除
-		v1.PUT("/user/:id", Update)    //编辑
+		v1.GET("/users", Users)                    //列表
+		v1.POST("/user", Store)                    //新增
+		v1.DELETE("user/:id", Destroy)             //删除
+		v1.PUT("/user/:id", Update)                //编辑
+		v1.GET("/user/:id", GetUserById)           //获取一个用户
+		v1.GET("/get_user_by_name", GetUserByName) //用户名模糊
 	}
 
 	// 注册验证器--用户名处理

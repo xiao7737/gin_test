@@ -93,3 +93,36 @@ func Update(c *gin.Context) {
 		"message": "修改成功",
 	})
 }
+
+func GetUserById(c *gin.Context) {
+	var user model.User
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
+	result, err := user.GetById(id)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    -1,
+			"message": err,
+		})
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code": 1,
+		"data": result,
+	})
+}
+
+// 根据用户名的like
+func GetUserByName(c *gin.Context) {
+	var user model.User
+	username := c.Query("username")
+	result, err := user.GetUserByName(username)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    -1,
+			"message": err,
+		})
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code": 1,
+		"data": result,
+	})
+}
