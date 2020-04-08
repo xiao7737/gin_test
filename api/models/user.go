@@ -2,6 +2,7 @@ package models
 
 import (
 	orm "gin_test/api/database"
+	"github.com/jinzhu/gorm"
 	"strings"
 )
 
@@ -35,8 +36,9 @@ func (user User) Insert() (id int64, err error) {
 }
 
 // get user list
+// Db后面加Debug()打印sql
 func (user *User) Users() (users []User, count int, err error) {
-	if err = orm.Eloquent.Order("id desc").Find(&users).Count(&count).Error; err != nil {
+	if err = orm.Eloquent.Debug().Order("id desc").Find(&users).Count(&count).Error; err != nil {
 		return
 	}
 	return
@@ -71,7 +73,8 @@ func (user *User) Update(id int64) (users User, err error) {
 }
 
 func (user *User) GetById(id int64) (users []User, err error) {
-	if err = orm.Eloquent.First(&users, id).Error; err != nil {
+	err = orm.Eloquent.First(&users, id).Error
+	if err != nil && err != gorm.ErrRecordNotFound { // 查不到记录也是一种错
 		return
 	}
 	return
