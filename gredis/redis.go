@@ -37,11 +37,19 @@ func Setup() error {
 func Get(key string) ( /*[]byte*/ string, error) {
 	conn := RedisConn.Get() //连接池中获取一个活跃连接
 	defer conn.Close()
-	if reply, err := redis. /*Bytes*/ String(conn.Do("GET", key)); err != nil {
-		return /*nil*/ "", err
+	if reply, err := redis.String(conn.Do("GET", key)); err != nil {
+		return "", err
 	} else {
 		return reply, nil
 	}
+
+	/*conn := RedisConn.Get()
+	defer conn.Close()
+	reply, err := redis.Bytes(conn.Do("GET", key))
+	if err != nil {
+		return nil, err
+	}
+	return reply, nil*/
 }
 
 func Exists(key string) bool {
