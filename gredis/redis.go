@@ -1,7 +1,6 @@
 package gredis
 
 import (
-	"encoding/json"
 	"gin_test/conf"
 	"github.com/gomodule/redigo/redis"
 	"time"
@@ -35,11 +34,11 @@ func Setup() error {
 	return nil
 }
 
-func Get(key string) ([]byte, error) {
+func Get(key string) ( /*[]byte*/ string, error) {
 	conn := RedisConn.Get() //连接池中获取一个活跃连接
 	defer conn.Close()
-	if reply, err := redis.Bytes(conn.Do("GET", key)); err != nil {
-		return nil, err
+	if reply, err := redis. /*Bytes*/ String(conn.Do("GET", key)); err != nil {
+		return /*nil*/ "", err
 	} else {
 		return reply, nil
 	}
@@ -55,16 +54,22 @@ func Exists(key string) bool {
 	}
 }
 
-func Set(key string, data interface{}, time int) (bool, error) {
+func Set(key string, value interface{}, time int) error {
 	conn := RedisConn.Get()
 	defer conn.Close()
-	value, err := json.Marshal(data)
+	/*data, err := json.Marshal(data)
 	if err != nil {
-		return false, err
+		return err
+	}*/
+	_, err := conn.Do("SET", key, value)
+	if err != nil {
+		return err
 	}
-	reply, err := redis.Bool(conn.Do("SET", key, value))
-	_, _ = conn.Do("EXPIRE", key, time)
-	return reply, nil
+	_, err = conn.Do("EXPIRE", key, time)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func Delete(key string) (bool, error) {

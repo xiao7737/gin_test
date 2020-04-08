@@ -4,9 +4,14 @@ import (
 	_ "gin_test/api/database"
 	orm "gin_test/api/database"
 	"gin_test/api/router"
+	"gin_test/gredis"
 	"net/http"
 	_ "net/http/pprof" // 开启监控
 )
+
+func init() {
+	_ = gredis.Setup() //初始化redis连接池
+}
 
 func main() {
 	go func() {

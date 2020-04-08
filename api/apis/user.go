@@ -100,4 +100,36 @@ func GetUserByName(c *gin.Context) {
 		"code": 1,
 		"data": result,
 	})
+
+	//redis获取key
+	/*data, _ := gredis.Get("username")
+	c.JSON(http.StatusOK, gin.H{
+		"code": 1,
+		"data": data,
+	})*/
+
+	//redis设置key
+	/*if err := gredis.Set("username2", "xi-redis-2", -1); err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"data": err,
+		})
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code": 1,
+		"data": "OK",
+	})*/
+
+	// redis删除key
+	/*if deleteRes, err := gredis.Delete("username3"); err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"data": err,
+		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"code": 1,
+			"data": deleteRes, //删除一个不存在的key，返回0，经过Bool转换后为false，
+		})
+	}*/
 }
