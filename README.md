@@ -6,7 +6,7 @@ export GO111MODULE=on
 step 2 :
 go mod init
 
-sstep 3 :
+step 3 :
 go get -v github.com/gin-gonic/gin
 
 
