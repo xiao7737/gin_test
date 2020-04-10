@@ -9,6 +9,7 @@ import (
 var RedisConn *redis.Pool
 
 func Setup() error {
+	config := conf.LoadConfig() //虽然此处调用了loadConfig，由于是单例，初始化server就已经获取配置，这里会直接返回实例
 	RedisConn = &redis.Pool{
 		MaxIdle:         30, //最大空闲连接
 		MaxActive:       30, //最大连接数，0没有限制
@@ -16,11 +17,11 @@ func Setup() error {
 		Wait:            false,
 		MaxConnLifetime: 0,
 		Dial: func() (conn redis.Conn, err error) { //配置连接
-			c, err := redis.Dial("tcp", conf.HOST)
+			c, err := redis.Dial("tcp", config.Redis.Address)
 			if err != nil {
 				return nil, err
 			}
-			if _, err := c.Do("AUTH", conf.AUTH); err != nil {
+			if _, err := c.Do("AUTH", config.Redis.Password); err != nil {
 				c.Close()
 				return nil, err
 			}

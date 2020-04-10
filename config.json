@@ -1,0 +1,17 @@
+{
+  "App": {
+    "RunPort": ":9999",
+    "PProfPort": ":8080"
+  },
+  "Redis": {
+    "Address": "127.0.0.1:6379",
+    "Password": "123456"
+  },
+  "Db": {
+    "Driver": "mysql",
+    "Address": "127.0.0.1:3306",
+    "Database": "gin_test",
+    "User": "root",
+    "Password": "123456"
+  }
+}

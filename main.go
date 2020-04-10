@@ -4,22 +4,25 @@ import (
 	_ "gin_test/api/database"
 	orm "gin_test/api/database"
 	"gin_test/api/router"
+	"gin_test/conf"
 	"gin_test/gredis"
 	"net/http"
 	_ "net/http/pprof" // 开启监控
 )
 
-func init() {
-	_ = gredis.Setup() //初始化redis连接池
+func main() {
+	startServer()
 }
 
-func main() {
+func startServer() {
+	config := conf.LoadConfig() //单例方式初始化 加载参数配置
+	_ = gredis.Setup()          //初始化redis连接池
 	go func() {
-		_ = http.ListenAndServe(":8080", nil) //查看  http://localhost:8080/debug/pprof/
+		_ = http.ListenAndServe(config.App.PProfPort, nil) //查看  http://localhost:8080/debug/pprof/
 	}()
 	defer orm.Eloquent.Close()
 	Router := router.InitRouter()
-	_ = Router.Run(":9999")
+	_ = Router.Run(config.App.RunPort)
 }
 
 //  go tool pprof -alloc_space http://127.0.0.1:8080/debug/pprof/heap	 内存的临时分配情况，可以提高程序的运行速度

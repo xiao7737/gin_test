@@ -1,6 +1,52 @@
 package conf
 
-const (
-	HOST = "127.0.0.1:6379"
-	AUTH = "123456"
+import (
+	"encoding/json"
+	"log"
+	"os"
+	"sync"
 )
+
+type App struct {
+	RunPort   string
+	PProfPort string
+}
+
+type Database struct {
+	Driver   string
+	Address  string
+	Database string
+	User     string
+	Password string
+}
+
+type Redis struct {
+	Address  string
+	Password string
+}
+
+type Configuration struct {
+	App   App
+	Db    Database
+	Redis Redis
+}
+
+var config *Configuration
+var once sync.Once
+
+func LoadConfig() *Configuration {
+	once.Do(func() {
+		// Open("config.json")  简约版
+		file, err := os.OpenFile("config.json", os.O_RDONLY, 400) //只读模式打开
+		if err != nil {
+			log.Fatalln("cannot open config file", err)
+		}
+		decoder := json.NewDecoder(file)
+		config = &Configuration{}
+		err = decoder.Decode(config)
+		if err != nil {
+			log.Fatalln("cannot get config from file", err)
+		}
+	})
+	return config
+}
