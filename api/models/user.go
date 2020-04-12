@@ -91,4 +91,12 @@ func (user *User) GetUserByName(username string) (users []User, err error) {
 	return
 }
 
+//事务处理
+func CreateUser(db *gorm.DB) error {
+	tx := db.Begin()
+	defer tx.Rollback()
+	// 操作
+	return tx.Commit().Error
+}
+
 // 所有链式方法都会创建并克隆一个新的 DB 对象 (共享一个连接池)，gorm 在多 goroutine 中是并发安全的
