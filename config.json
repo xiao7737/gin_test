@@ -13,5 +13,10 @@
     "Database": "gin_test",
     "User": "root",
     "Password": "123456"
+  },
+  "RabbitMQ": {
+    "Address": "127.0.0.1:5672",
+    "User": "guest",
+    "Password": "guest"
   }
 }
