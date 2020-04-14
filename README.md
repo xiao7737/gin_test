@@ -17,3 +17,4 @@ go get -v github.com/gin-gonic/gin
 ####自定义验证器
 ####gorm的相关应用
 ####封装gin的返回函数
+####引入RabbitMQ中间件
