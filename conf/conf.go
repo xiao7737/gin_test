@@ -24,11 +24,17 @@ type Redis struct {
 	Address  string
 	Password string
 }
+type RabbitMQ struct {
+	Address  string
+	User     string
+	Password string
+}
 
 type Configuration struct {
-	App   App
-	Db    Database
-	Redis Redis
+	App      App
+	Db       Database
+	Redis    Redis
+	RabbitMQ RabbitMQ
 }
 
 var config *Configuration

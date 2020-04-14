@@ -2,6 +2,7 @@ package router
 
 import (
 	. "gin_test/api/apis"
+	. "gin_test/middleware/IpMiddleware"
 	"gin_test/validator/user"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
@@ -10,7 +11,7 @@ import (
 
 func InitRouter() *gin.Engine {
 	router := gin.Default()
-	v1 := router.Group("/v1")
+	v1 := router.Group("/v1").Use(IpMiddleware())
 	{
 		v1.GET("/users", Users)                    //列表
 		v1.POST("/user", Store)                    //新增

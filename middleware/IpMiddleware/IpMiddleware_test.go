@@ -1,4 +1,4 @@
-package main
+package IpMiddleware
 
 import (
 	"github.com/gin-gonic/gin"
@@ -11,9 +11,9 @@ const requestID = "requestID"
 func main() {
 	r := gin.Default()
 	//两个中间件：①检测路由，②给每个请求添加一个requestId
-	r.Use(IPMiddleware(), func(c *gin.Context) {
+	r.Use(IpMiddleware1(), func(c *gin.Context) {
 		c.Set(requestID, rand.Int())
-		c.Next() // 每个中间件添加next，继续执行不中断后续
+		//c.Next()
 	})
 
 	r.GET("/test_middleware", func(c *gin.Context) {
@@ -31,7 +31,7 @@ func main() {
 
 // Default() 默认会加载 logger 和 recovery 两个中间件
 // 自定义中间件就可以参照logger进行设置
-func IPMiddleware() gin.HandlerFunc {
+func IpMiddleware1() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// white ip list
 		ipList := []string{
@@ -47,7 +47,8 @@ func IPMiddleware() gin.HandlerFunc {
 		}
 		if !flag {
 			c.String(401, "%s 没有访问权限", clientIP)
-			c.Abort() //请求错误了使用abort，提前结束后续的handler
+			c.Abort() //结束当前的handler
 		}
+		c.Next() // 每个中间件添加next，继续执行不中断后续handler
 	}
 }
