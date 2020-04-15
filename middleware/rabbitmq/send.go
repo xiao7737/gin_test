@@ -29,6 +29,7 @@ func main() {
 		false,            //no-wait
 		map[string]interface{}{ //arguments map
 			"x-queue-type": "classic", //type of queue
+			//"x-max-priority": 9,         //创建queue的时候设置最大优先级
 		},
 	)
 	FailOnError(err, "Failed to declare a queue")
@@ -43,7 +44,7 @@ func main() {
 			amqp.Publishing{
 				ContentType:  "text/plain",
 				Body:         []byte(msg),
-				Priority:     9, //优先级，范围0-9  rabbit绑定exchange设置参数"x-max-priority": 9
+				Priority:     9, //设置本消息的优先级，范围0-9
 				DeliveryMode: 1, //2是持久化，消息的持久化需要队列持久化支持
 				// rabbit为啥不用bool来表示消息是否持久化，而是unit的1和2来表示
 				//2020-04-15 明白了，源码介绍目前是两个枚举，还有其它模式，用枚举方便扩展！
