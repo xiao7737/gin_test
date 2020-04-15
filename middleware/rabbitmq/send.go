@@ -43,8 +43,10 @@ func main() {
 			amqp.Publishing{
 				ContentType:  "text/plain",
 				Body:         []byte(msg),
-				DeliveryMode: 1, //2是持久化，消息的持久化需要队列也是持久化
-				//todo  rabbit为啥不用bool来表示消息是否持久化，而是unit的1和2来表示
+				Priority:     9, //优先级，范围0-9
+				DeliveryMode: 1, //2是持久化，消息的持久化需要队列持久化支持
+				// rabbit为啥不用bool来表示消息是否持久化，而是unit的1和2来表示
+				//2020-04-15 明白了，源码介绍目前是两个枚举，还有其它模式，用枚举方便扩展！
 			})
 		if err != nil {
 			FailOnError(err, "Failed to publish a message")
