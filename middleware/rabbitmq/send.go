@@ -41,8 +41,10 @@ func main() {
 			false,               //mandatory
 			false,               //immediate
 			amqp.Publishing{
-				ContentType: "text/plain",
-				Body:        []byte(msg),
+				ContentType:  "text/plain",
+				Body:         []byte(msg),
+				DeliveryMode: 1, //2是持久化，消息的持久化需要队列也是持久化
+				//todo  rabbit为啥不用bool来表示消息是否持久化，而是unit的1和2来表示
 			})
 		if err != nil {
 			FailOnError(err, "Failed to publish a message")

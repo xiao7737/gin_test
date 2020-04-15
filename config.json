@@ -17,6 +17,6 @@
   "RabbitMQ": {
     "Address": "127.0.0.1:5672",
     "User": "guest",
-    "Password": "guest"
+    "Password": "Aa123456"
   }
 }
