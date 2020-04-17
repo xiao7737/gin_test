@@ -23,7 +23,7 @@ func main() {
 	// Declaring a queue is idempotent - queue will only be created if it doesn't exist already.
 	_, err = ch.QueueDeclare(
 		"gin_test_queue", //queue name
-		false,            //durable
+		true,             //durable
 		false,            //autoDelete
 		false,            //exclusive
 		false,            //no-wait
