@@ -19,7 +19,7 @@ func main() {
 
 	q, err := ch.QueueDeclare(
 		"gin_test_queue", //queue name
-		false,            //durable
+		true,             //durable
 		false,            //autoDelete
 		false,            //exclusive
 		false,            //no-wait
