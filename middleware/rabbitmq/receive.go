@@ -2,7 +2,7 @@ package main
 
 import (
 	"gin_test/conf"
-	. "gin_test/middleware/rabbitmq/conn"
+	. "gin_test/msg"
 	"github.com/streadway/amqp"
 	"log"
 )

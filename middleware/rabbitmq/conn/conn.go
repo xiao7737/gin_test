@@ -2,8 +2,8 @@ package conn
 
 import (
 	"gin_test/conf"
+	. "gin_test/msg"
 	"github.com/streadway/amqp"
-	"log"
 )
 
 func GetRabbitAndQueue() (ch *amqp.Channel) {
@@ -30,10 +30,4 @@ func GetRabbitAndQueue() (ch *amqp.Channel) {
 	)
 	FailOnError(err, "Failed to declare a queue")
 	return ch
-}
-
-func FailOnError(err error, msg string) {
-	if err != nil {
-		log.Fatalf("%s: %s", msg, err)
-	}
 }
