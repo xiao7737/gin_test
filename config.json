@@ -18,5 +18,9 @@
     "Address": "127.0.0.1:5672",
     "User": "guest",
     "Password": "Aa123456"
+  },
+  "MongoDB": {
+    "Address": "mongodb://127.0.0.1:27017",
+    "MaxPoolSize": 30
   }
 }

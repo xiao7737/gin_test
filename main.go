@@ -5,7 +5,8 @@ import (
 	orm "gin_test/api/database"
 	"gin_test/api/router"
 	"gin_test/conf"
-	"gin_test/gredis"
+	_ "gin_test/gmongo" //初始化mongo连接池
+	_ "gin_test/gredis" //初始化redis连接池
 	"net/http"
 	_ "net/http/pprof" // 开启监控
 )
@@ -16,7 +17,6 @@ func main() {
 
 func startServer() {
 	config := conf.LoadConfig() //单例方式初始化 加载参数配置
-	_ = gredis.Setup()          //初始化redis连接池
 	go func() {
 		_ = http.ListenAndServe(config.App.PProfPort, nil) //查看  http://localhost:8080/debug/pprof/
 	}()

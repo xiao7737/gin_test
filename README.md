@@ -10,17 +10,24 @@ step 3 :
 go get -v github.com/gin-gonic/gin
 
 
-## 实现
+## Features
+单例模式，json加载配置
+
 自定义ip中间件
 
-redis连接池
+Redis应用  /gredis
 
-单例模式，加载json文件配置
+MongoDB应用  /gmongo
+
+gorm应用，string.Builder
+
+RabbitMQ应用 /middleware
 
 自定义验证器
 
-gorm的相关应用
+Restful api设计
 
-封装gin的返回函数
+gin的返回函数
 
-引入RabbitMQ中间件
+性能测试 pprof
+

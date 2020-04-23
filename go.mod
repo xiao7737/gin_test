@@ -8,5 +8,6 @@ require (
 	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/jinzhu/gorm v1.9.12
 	github.com/streadway/amqp v0.0.0-20200108173154-1c71cc93ed71
+	go.mongodb.org/mongo-driver v1.3.2
 	gopkg.in/go-playground/validator.v8 v8.18.2
 )
