@@ -7,12 +7,12 @@ import (
 )
 
 type User struct {
-	ID       int64  `json:"id"`
+	ID       int64  `json:"id,omitempty"`
 	Username string `form:"username" json:"username" binding:"required,NameValid"`  //添加自定义验证规则
 	Age      int    `form:"age" json:",string,age" binding:"required,gt=10,lt=120"` //将int转成string返回
 	// binding中的规则不能有空格！！！此处遇坑
 	//或者使用 sql.NullInt64，scanner/valuer避免0，''，false的情况
-	Password string `form:"password" json:"-" binding:"required"` // - 不返回该字段
+	Password string `form:"password" json:"-"` // - 不返回该字段
 }
 
 // 默认表名为struct的复数，本model对应的表名为users

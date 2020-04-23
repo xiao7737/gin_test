@@ -2,6 +2,7 @@ package msg
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
 )
 
 const (
@@ -47,4 +48,10 @@ func GetErrorMsg(code int) string {
 		return msg
 	}
 	return msgMap[ERROR]
+}
+
+func FailOnError(err error, msg string) {
+	if err != nil {
+		log.Fatalf("%s: %s", msg, err)
+	}
 }
