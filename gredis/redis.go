@@ -8,7 +8,7 @@ import (
 
 var RedisConn *redis.Pool
 
-func Setup() error {
+func init() {
 	config := conf.LoadConfig() //虽然此处调用了loadConfig，由于是单例，初始化server就已经获取配置，这里会直接返回实例
 	RedisConn = &redis.Pool{
 		MaxIdle:         30, //最大空闲连接
@@ -32,7 +32,6 @@ func Setup() error {
 			return err
 		},
 	}
-	return nil
 }
 
 func Get(key string) ( /*[]byte*/ string, error) {

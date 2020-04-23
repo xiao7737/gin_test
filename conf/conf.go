@@ -29,12 +29,17 @@ type RabbitMQ struct {
 	User     string
 	Password string
 }
+type MongoDB struct {
+	Address     string
+	MaxPoolSize uint64
+}
 
 type Configuration struct {
 	App      App
 	Db       Database
 	Redis    Redis
 	RabbitMQ RabbitMQ
+	MongoDB  MongoDB
 }
 
 var config *Configuration
