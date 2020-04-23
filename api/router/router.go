@@ -18,7 +18,13 @@ func InitRouter() *gin.Engine {
 		v1.DELETE("user/:id", Destroy)             //删除
 		v1.PUT("/user/:id", Update)                //编辑
 		v1.GET("/user/:id", GetUserById)           //获取一个用户
-		v1.GET("/get_user_by_name", GetUserByName) //用户名模糊
+		v1.GET("/get_user_by_name", GetUserByName) //用户名模糊redis
+	}
+	v2 := router.Group("/v2").Use(IpMiddleware())
+	{
+		v2.GET("/get_user_mongo", GetUserByNameFromMongo)  //查询from mongo
+		v2.POST("/insert_user_mongo", InsertUserIntoMongo) //新增from mongo
+		v2.POST("/delete_user_mongo", DeleteUserFromMongo) //删除from mongo
 	}
 
 	// 注册验证器--用户名处理
