@@ -22,9 +22,12 @@ func InitRouter() *gin.Engine {
 	}
 	v2 := router.Group("/v2").Use(IpMiddleware())
 	{
-		v2.GET("/get_user_mongo", GetUserByNameFromMongo)  //查询from mongo
-		v2.POST("/insert_user_mongo", InsertUserIntoMongo) //新增from mongo
-		v2.POST("/delete_user_mongo", DeleteUserFromMongo) //删除from mongo
+		v2.GET("/get_user_mongo", GetUserByNameFromMongo)           //查询from mongo
+		v2.POST("/insert_user_mongo", InsertUserIntoMongo)          //新增from mongo
+		v2.POST("/delete_user_mongo", DeleteUserFromMongo)          //删除from mongo
+		v2.GET("/count_collection_mongo", DataCountOfCollection)    //查询一个collection的总数
+		v2.POST("/update_age_by_username", UpdateUserAgeByUsername) //更新
+		v2.GET("/get_all_user", GetAllData)                         //获取全部user
 	}
 
 	// 注册验证器--用户名处理

@@ -168,6 +168,7 @@ func InsertUserIntoMongo(c *gin.Context) {
 	ginReturn.Response(http.StatusOK, msg.SUCCESS, gin.H{"id": data.InsertedID})
 }
 
+//delete user by username
 func DeleteUserFromMongo(c *gin.Context) {
 	ginReturn := msg.Gin{C: c}
 	username := c.Query("username")
@@ -178,6 +179,41 @@ func DeleteUserFromMongo(c *gin.Context) {
 	}
 	ginReturn.Response(http.StatusOK, msg.SUCCESS, "delete success")
 }
-func updateUserFromMongo(c *gin.Context) {
 
+//update age by username
+func UpdateUserAgeByUsername(c *gin.Context) {
+	ginReturn := msg.Gin{C: c}
+	username := c.Query("username")
+	age := c.Query("age")
+	result, err := gmongo.UpdateOne("user", "user", "username", username, "age", age)
+	if result == -1 {
+		ginReturn.Response(http.StatusOK, msg.NO_ROWS, "")
+		return
+	}
+	if err != nil {
+		ginReturn.Response(http.StatusOK, msg.UPDATE_FALIED, "")
+		return
+	}
+	ginReturn.Response(http.StatusOK, msg.SUCCESS, "")
+}
+
+func DataCountOfCollection(c *gin.Context) {
+	ginReturn := msg.Gin{C: c}
+	collection := c.Query("collection")
+	name, size := gmongo.CollectionCount("user", collection) //collection=user
+	if size == 0 {
+		ginReturn.Response(http.StatusOK, msg.NO_ROWS, "empty collection")
+		return
+	}
+	ginReturn.Response(http.StatusOK, msg.SUCCESS, gin.H{"collection": name, "count": size})
+}
+
+func GetAllData(c *gin.Context) {
+	ginReturn := msg.Gin{C: c}
+	name, data, err := gmongo.FindAll("user", "user")
+	if err != nil {
+		ginReturn.Response(http.StatusOK, msg.ERROR, "get data error")
+		return
+	}
+	ginReturn.Response(http.StatusOK, msg.SUCCESS, gin.H{"collection": name, "data": data})
 }

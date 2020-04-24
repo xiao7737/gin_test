@@ -27,10 +27,11 @@ func SetConnect() *mongo.Client {
 	config := conf.LoadConfig()
 	clientOptions := options.Client().ApplyURI(config.MongoDB.Address).SetMaxPoolSize(config.MongoDB.MaxPoolSize)
 
-	//connect to mongo
 	//利用context的WithTimeout做连接超时限制，达到超时，所有context取消
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
+
+	//connect to mongo
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
 		log.Fatalf("mongo connect err: %v", err)
@@ -73,7 +74,43 @@ func DeleteOne(db, collect, deleteKey string, deleteValue interface{}) (int64, e
 	return result.DeletedCount, nil
 }
 
-//deleteMany
+//deleteMany  同DeleteOne使用，使用DeleteMany()
+
 //update
-//count
-//exist
+func UpdateOne(db, collect, queryKey, queryValue, updateKey string, updateValue interface{}) (int64, error) {
+	client := MongoDB.MongoConn
+	collection := client.Database(db).Collection(collect)
+	query := bson.M{queryKey: queryValue}
+	update := bson.M{"$set": bson.M{updateKey: updateValue}}
+	result, err := collection.UpdateOne(context.TODO(), query, update)
+	if result.MatchedCount == 0 {
+		return -1, nil
+	}
+	if err != nil {
+		return 0, err
+	}
+	return result.ModifiedCount, nil
+}
+
+//一个集合中的数据个数
+func CollectionCount(db, collect string) (string, int64) {
+	client := MongoDB.MongoConn
+	collection := client.Database(db).Collection(collect)
+	collectionName := collection.Name()
+	size, _ := collection.EstimatedDocumentCount(context.TODO())
+	return collectionName, size
+}
+
+//查找一个集合中全部的数据  db.user.find(),并且按照age正序输出
+func FindAll(db, collect string) (string, interface{}, error) {
+	client := MongoDB.MongoConn
+	collection := client.Database(db).Collection(collect)
+	collectionName := collection.Name()
+	opts := options.Find().SetSort(bson.D{{"age", 1}})
+	results, err := collection.Find(context.TODO(), bson.D{}, opts)
+	var data []bson.M
+	if err = results.All(context.TODO(), &data); err != nil {
+		return collectionName, nil, err
+	}
+	return collectionName, data, nil
+}
