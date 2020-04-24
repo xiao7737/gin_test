@@ -28,7 +28,8 @@ func SetConnect() *mongo.Client {
 	clientOptions := options.Client().ApplyURI(config.MongoDB.Address).SetMaxPoolSize(config.MongoDB.MaxPoolSize)
 
 	//connect to mongo
-	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+	//利用context的WithTimeout做连接超时限制，达到超时，所有context取消
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
