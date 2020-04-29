@@ -104,10 +104,17 @@ func GetUserByName(c *gin.Context) {
 
 	//redis action
 	//redis获取key
-	/*data, _ := gredis.Get("username")
+	/*data, _ := gredis.Get("name")
 	c.JSON(http.StatusOK, gin.H{
 		"code": 1,
 		"data": data,
+	})*/
+
+	//查询redis中是否存在
+	/*exists := gredis.Exists(c.Query("username"))
+	c.JSON(http.StatusOK, gin.H{
+		"code": 1,
+		"exists": exists,
 	})*/
 
 	//redis设置key，并设置过期时间
