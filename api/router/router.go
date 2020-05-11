@@ -20,7 +20,7 @@ func InitRouter() *gin.Engine {
 		v1.GET("/user/:id", GetUserById)           //获取一个用户
 		v1.GET("/get_user_by_name", GetUserByName) //用户名模糊redis
 	}
-	v2 := router.Group("/v2").Use(IpMiddleware())
+	v2 := router.Group("/v2").Use(IpMiddleware())   //v2的分组接口数据全部来自mongo
 	{
 		v2.GET("/get_user_mongo", GetUserByNameFromMongo)           //查询from mongo
 		v2.POST("/insert_user_mongo", InsertUserIntoMongo)          //新增from mongo
