@@ -5,8 +5,9 @@ import (
 	orm "gin_test/api/database"
 	"gin_test/api/router"
 	"gin_test/conf"
-	_ "gin_test/gmongo" //初始化mongo连接池
-	_ "gin_test/gredis" //初始化redis连接池
+	/*_ "gin_test/gmongo"   //初始化mongo连接池
+	_ "gin_test/go_redis" //初始化redis-cluster
+	_ "gin_test/gredis"   //初始化redis连接池*/
 	"net/http"
 	_ "net/http/pprof" // 开启监控
 )
