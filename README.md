@@ -15,19 +15,19 @@ go get -v github.com/gin-gonic/gin
 
 自定义ip中间件
 
-Redis应用  /gredis
+Redis应用--  /gredis
 
-MongoDB应用  /gmongo
+RedisCluster应用--   /go-redis
 
-gorm应用，string.Builder
+MongoDB应用--  /gmongo
 
-RabbitMQ应用 /middleware
+MySQL的gorm应用--  string.Builder
 
-自定义验证器
+RabbitMQ应用-- /middleware
 
-Restful api设计
+反射自定义验证器
 
-gin的返回函数
+RSETful api设计
 
 性能测试 pprof
 
