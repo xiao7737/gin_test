@@ -19,10 +19,13 @@ type Database struct {
 	User     string
 	Password string
 }
-
 type Redis struct {
 	Address  string
 	Password string
+}
+type RedisCluster struct {
+	Password    string
+	MaxPoolSize int
 }
 type RabbitMQ struct {
 	Address  string
@@ -35,11 +38,12 @@ type MongoDB struct {
 }
 
 type Configuration struct {
-	App      App
-	Db       Database
-	Redis    Redis
-	RabbitMQ RabbitMQ
-	MongoDB  MongoDB
+	App          App
+	Db           Database
+	Redis        Redis
+	RedisCluster RedisCluster //go-redis
+	RabbitMQ     RabbitMQ
+	MongoDB      MongoDB
 }
 
 var config *Configuration
