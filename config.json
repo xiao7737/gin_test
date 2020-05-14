@@ -8,7 +8,7 @@
     "Password": "123456"
   },
   "RedisCluster": {
-    "Password": "",
+    "Password": "redis_cluster_pw",
     "MaxPoolSize": 30
   },
   "Db": {
