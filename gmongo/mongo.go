@@ -16,6 +16,14 @@ type Mongo struct {
 
 var MongoDB *Mongo
 
+// todo 优化init
+// 此处不应该用init来初始化连接，应该显示的定义一个NewClient函数，使用的时候显示调用NewClient(Client)
+// 避免另外的package一引入这个包就会发生资源的初始化，资源初始化非常耗时且耗资源
+/*func NewClient(MongoConn *ClientConn) Mongo {
+	return &Mongo{
+		MongoConn: MongoConn,
+	}
+}*/
 func init() {
 	MongoDB = &Mongo{
 		MongoConn: SetConnect(),
