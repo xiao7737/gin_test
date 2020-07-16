@@ -53,6 +53,7 @@ func SetConnect() *mongo.Client {
 	return client
 }
 
+// todo 通过接口暴露实现的函数
 func FindOne(db, collect, queryKey string, queryValue interface{}) *mongo.SingleResult {
 	client := MongoDB.MongoConn
 	collection, _ := client.Database(db).Collection(collect).Clone() //利用已经存在的mongo连接
