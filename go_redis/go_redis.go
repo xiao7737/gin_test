@@ -13,7 +13,7 @@ type Redis struct {
 
 var RedisCluster *Redis
 
-func init() {
+func init_() {
 	RedisCluster = &Redis{
 		RedisConn: GetConnect(),
 	}
